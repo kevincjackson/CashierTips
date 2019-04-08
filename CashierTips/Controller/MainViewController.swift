@@ -131,10 +131,7 @@ extension MainViewController: CashierDelegate {
         
         // Add new cashier
         if isNew {
-            // Only add if the cashier non-empty
-            if cashier.name != "?" && cashier.hoursWorked != 0 {
-                cashiers.append(cashier)
-            }
+            cashiers.append(cashier)
         }
         // Replace existing cashier
         else {
