@@ -58,12 +58,17 @@ class CashierViewController: UIViewController {
             selectHoursInPickerView(hours: cashier!.hoursWorked)
         }
     }
-    
+
     // MARK: - Target-Actions
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         let cashier = Cashier(name: nameEntered, hoursWorked: hoursSelected)
-        delegate?.cashierUpdated(cashier: cashier, isNew: isNew)
-        dismiss(animated: true, completion: nil)
+        if cashier.name == "?" && cashier.hoursWorked == 0 {
+            showEmptyCashierAlert()
+        }
+        else {
+            delegate?.cashierUpdated(cashier: cashier, isNew: isNew)
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -76,6 +81,16 @@ class CashierViewController: UIViewController {
         pickerView.selectRow(Int(hours * 100) % 100, inComponent: 2, animated: false)
     }
     
+    private func showEmptyCashierAlert() {
+        // create the alert
+        let alert = UIAlertController(title: "Empty Cashier", message: "Please enter cashier info or use the cancel button.", preferredStyle: UIAlertController.Style.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 

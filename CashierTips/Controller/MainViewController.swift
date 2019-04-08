@@ -60,6 +60,8 @@ class MainViewController: UITableViewController {
         performSegue(withIdentifier: "newCashier", sender: self)
     }
 
+    // MARK: - Helper Functions
+
     // MARK: - Tableview
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -129,7 +131,10 @@ extension MainViewController: CashierDelegate {
         
         // Add new cashier
         if isNew {
-           cashiers.append(cashier)
+            // Only add if the cashier non-empty
+            if cashier.name != "?" && cashier.hoursWorked != 0 {
+                cashiers.append(cashier)
+            }
         }
         // Replace existing cashier
         else {
