@@ -55,8 +55,7 @@ class CashierViewController: UIViewController {
         else {
             isNew = false
             textField.text = cashier!.name
-            pickerView.selectRow(Int(cashier!.hoursWorked), inComponent: 0, animated: false)
-            pickerView.selectRow(Int(cashier!.hoursWorked * 100) % 100, inComponent: 2, animated: false)
+            selectHoursInPickerView(hours: cashier!.hoursWorked)
         }
     }
     
@@ -70,6 +69,13 @@ class CashierViewController: UIViewController {
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: - Helper Functions
+    private func selectHoursInPickerView(hours: Double) {
+        pickerView.selectRow(Int(hours), inComponent: 0, animated: false)
+        pickerView.selectRow(Int(hours * 100) % 100, inComponent: 2, animated: false)
+    }
+    
 }
 
 
