@@ -10,40 +10,41 @@ import UIKit
 
 class TipTrackingSheetController: UITableViewController {
 
-    var cashiers = [Cashier]() {
-        didSet {
-            totalHoursWorked = self.cashiers.reduce(0, { memo, cashier in
-                memo + cashier.hoursWorked
-            })
-            tipRate = totalHoursWorked != 0 ? (totalTips / totalHoursWorked!) : 0
-        }
-    }
+    // Stored properties
+    var totalTips: Double = 0.0 { didSet { tableView.reloadData() } }
+    var cashiers = [Cashier]()
     var sections = ["Total Tips", "Cashiers"]
-    var totalHoursWorked: Double?
-    var totalTips: Double = 0.0 {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    var totalTipsDescription: String {
-        if let totalHoursWorked = totalHoursWorked {
-            return "Total Hours: \(totalHoursWorked), Tip Rate: \(tipRate!)"
-        }
-        else {
-            return "Total Hours: 0, Tip Rate: 0"
-        }
-    }
-    var tipRate: Double? {
-        didSet {
-            cashiers.forEach { $0.tipRate = self.tipRate! }
-            tableView.reloadData()
-        }
-    }
 
-    // MARK: - View Life Cycle
+    
+    // Computed Properties
+    var tipRate: Double {
+        return totalHoursWorked != 0 ? totalTips / totalHoursWorked : 0
+    }
+    var totalHoursWorked: Double {
+        return cashiers.reduce(0) { $0 + $1.hoursWorked }
+        
+    }
+    var totalTipsDescription: String = "TODO"
+
+//        if let totalHoursWorked = totalHoursWorked {
+//            return "Total Hours: \(totalHoursWorked), Tip Rate: \(tipRate!)"
+//        }
+//        else {
+//            return "Total Hours: 0, Tip Rate: 0"
+//        }
+
+//    {
+////        didSet {
+////            cashiers.forEach { $0.tipRate = self.tipRate! }
+////            tableView.reloadData()
+////        }
+//    }
+
+//    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // Set nav title
         title = "Cashier Tips"
         
         cashiers = [
@@ -52,7 +53,7 @@ class TipTrackingSheetController: UITableViewController {
             Cashier(name: "Calvin", hoursWorked: 7.2),
         ]
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gotoTotalTips" {
             let totalTipsVC = segue.destination as! DollarAmountViewController
@@ -62,60 +63,56 @@ class TipTrackingSheetController: UITableViewController {
         else {
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
-            let cashier = cashiers[tableView.indexPathForSelectedRow!.row]
-            print(cashier.name)
+//            let cashier = cashiers[tableView.indexPathForSelectedRow!.row]
+//            print(cashier.name)
         }
     }
-    
+
     // MARK: - Tableview
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         return sections[section]
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return section == 0 ? 1 : cashiers.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         var cell: UITableViewCell
-        
+
         if indexPath.section == 0 {
-            
             cell = tableView.dequeueReusableCell(withIdentifier: "totalTipsCell", for: indexPath)
             cell.textLabel?.text = "$\(totalTips)"
             cell.detailTextLabel?.text = totalTipsDescription
         }
         else {
-            
             cell = tableView.dequeueReusableCell(withIdentifier: "cashierCell", for: indexPath)
             let cashier = cashiers[indexPath.row]
             cell.textLabel?.text = "\(cashier.name) (\(cashier.hoursWorked) h)"
-            cell.detailTextLabel?.text = "$\(cashier.tipAmountDescription ?? String(0))"
+//            cell.detailTextLabel?.text = "$\(cashier.tipAmountDescription ?? String(0))"
         }
-        
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 
         // Header text
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont.systemFont(ofSize: 36)
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 36 + 2 * 8
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         if indexPath.section == 0 {
             performSegue(withIdentifier: "gotoTotalTips", sender: self)
         }
@@ -125,12 +122,14 @@ class TipTrackingSheetController: UITableViewController {
     }
 }
 
+
 // MARK: - DollarAmountViewDelegate
 extension TipTrackingSheetController: DollarAmountViewDelegate {
     func dollarAmountUpdated(amount: Double) {
         totalTips = amount
     }
 }
+
 
 // MARK: - CashierDelegate
 extension TipTrackingSheetController: CashierDelegate {

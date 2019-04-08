@@ -12,18 +12,19 @@ class Cashier {
     
     var name: String
     var hoursWorked: Double
-    var tipRate: Double? {
-        didSet {
-            tipAmount = tipRate! * hoursWorked
-            tipAmountDescription = String(round(tipAmount! * 100) / 100)
-        }
-    }
-    var tipAmount: Double?
-    var tipAmountDescription: String?
     
     init(name: String, hoursWorked: Double) {
         self.name = name
         self.hoursWorked = hoursWorked
+    }
+    
+    private func getTips(rate: Double) -> Double {
+        return hoursWorked * rate
+    }
+    
+    private func getTipsDescribed(rate: Double) -> String {
+        let tips = getTips(rate: rate)
+        return String(round(tips * 100) / 100)
     }
     
 }
