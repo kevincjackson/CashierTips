@@ -74,7 +74,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="qVX-QD-ab0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="V2p-We-h2B"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="V2p-We-h2B">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="jEg-q0-IXp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="HoX-jA-Epq" kind="presentation" identifier="gotoTipView" id="NNh-b1-ENO"/>

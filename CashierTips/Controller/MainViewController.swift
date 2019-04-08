@@ -25,7 +25,8 @@ class MainViewController: UITableViewController {
     var totalTipsDescription: String {
         return "Total Hours: \(totalHoursWorked), Tip Rate: \(tipRate)"
     }
-
+    
+    
 //    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class MainViewController: UITableViewController {
         // Set nav title
         title = "Cashier Tips"
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gotoTipView" {
             let totalTipsVC = segue.destination as! TipViewController
@@ -44,6 +45,11 @@ class MainViewController: UITableViewController {
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
         }
+    }
+    
+    // MARK: - Target-Actions
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "gotoCashierView", sender: self)
     }
 
     // MARK: - Tableview
@@ -82,11 +88,11 @@ class MainViewController: UITableViewController {
 
         // Header text
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.systemFont(ofSize: 36)
+        header.textLabel?.font = UIFont.systemFont(ofSize: Constants.HeaderFontSize)
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 36 + 2 * 8
+        return Constants.HeaderFontSize + Constants.Padding
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
