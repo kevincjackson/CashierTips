@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A4F684622588A4F00BFDADB /* DollarAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F684522588A4F00BFDADB /* DollarAmountViewController.swift */; };
+		0A4F684622588A4F00BFDADB /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F684522588A4F00BFDADB /* TipViewController.swift */; };
 		0A5A577D2256B11100D669C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A577C2256B11100D669C2 /* AppDelegate.swift */; };
 		0A5A57822256B11100D669C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5A57802256B11100D669C2 /* Main.storyboard */; };
 		0A5A57842256B11200D669C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A5A57832256B11200D669C2 /* Assets.xcassets */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A4F684522588A4F00BFDADB /* DollarAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DollarAmountViewController.swift; sourceTree = "<group>"; };
+		0A4F684522588A4F00BFDADB /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		0A5A57792256B11100D669C2 /* CashierTips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashierTips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5A577C2256B11100D669C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A5A577E2256B11100D669C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -60,9 +60,9 @@
 		0A5A577B2256B11100D669C2 /* CashierTips */ = {
 			isa = PBXGroup;
 			children = (
+				0A6689E5225950B300BBFCCC /* View */,
 				0A6689E6225950BA00BBFCCC /* Controller */,
 				0A6689E4225950A800BBFCCC /* Model */,
-				0A6689E5225950B300BBFCCC /* View */,
 				0A5A57832256B11200D669C2 /* Assets.xcassets */,
 				0A5A57852256B11200D669C2 /* LaunchScreen.storyboard */,
 				0A5A57882256B11200D669C2 /* Info.plist */,
@@ -91,7 +91,7 @@
 			children = (
 				0A5A577C2256B11100D669C2 /* AppDelegate.swift */,
 				0A5A577E2256B11100D669C2 /* MainViewController.swift */,
-				0A4F684522588A4F00BFDADB /* DollarAmountViewController.swift */,
+				0A4F684522588A4F00BFDADB /* TipViewController.swift */,
 				0A6689E222593DED00BBFCCC /* CashierViewController.swift */,
 			);
 			path = Controller;
@@ -168,7 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A4F684622588A4F00BFDADB /* DollarAmountViewController.swift in Sources */,
+				0A4F684622588A4F00BFDADB /* TipViewController.swift in Sources */,
 				0A5A578F2256B1E400D669C2 /* Cashier.swift in Sources */,
 				0A5A577D2256B11100D669C2 /* AppDelegate.swift in Sources */,
 				0A6689E322593DED00BBFCCC /* CashierViewController.swift in Sources */,

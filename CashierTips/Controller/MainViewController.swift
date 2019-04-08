@@ -42,7 +42,7 @@ class MainViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gotoTotalTips" {
-            let totalTipsVC = segue.destination as! DollarAmountViewController
+            let totalTipsVC = segue.destination as! TipViewController
             totalTipsVC.delegate = self
             totalTipsVC.selectedAmount = totalTips
         }
@@ -110,8 +110,8 @@ class MainViewController: UITableViewController {
 
 
 // MARK: - DollarAmountViewDelegate
-extension MainViewController: DollarAmountViewDelegate {
-    func dollarAmountUpdated(amount: Double) {
+extension MainViewController: TipViewDelegate {
+    func tipAmountUpdated(amount: Double) {
         totalTips = amount
     }
 }

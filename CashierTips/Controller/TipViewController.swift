@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol DollarAmountViewDelegate {
-    func dollarAmountUpdated(amount: Double)
+protocol TipViewDelegate {
+    func tipAmountUpdated(amount: Double)
 }
 
-class DollarAmountViewController: UIViewController {
+class TipViewController: UIViewController {
     
     let dollarOptions: [String] = Array(0...999).map { String($0) }
     let centOptions: [String] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99"]
     var selectedAmount: Double?
-    var delegate: DollarAmountViewDelegate?
+    var delegate: TipViewDelegate?
     
     @IBOutlet weak var pickerView: UIPickerView!
     
@@ -38,12 +38,12 @@ class DollarAmountViewController: UIViewController {
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         let amount: Double = selectedAmount ?? 0
-        delegate?.dollarAmountUpdated(amount: amount)
+        delegate?.tipAmountUpdated(amount: amount)
         dismiss(animated: true, completion: nil)
     }
 }
 
-extension DollarAmountViewController: UIPickerViewDataSource {
+extension TipViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 4
@@ -66,7 +66,7 @@ extension DollarAmountViewController: UIPickerViewDataSource {
     }
 }
 
-extension DollarAmountViewController: UIPickerViewDelegate {
+extension TipViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if component == 0 {

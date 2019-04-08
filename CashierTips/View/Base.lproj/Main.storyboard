@@ -128,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="1893.5999999999999" y="472.90640394088672"/>
         </scene>
-        <!--Dollar Amount View Controller-->
+        <!--Tip View Controller-->
         <scene sceneID="9yo-Eo-X9G">
             <objects>
-                <viewController storyboardIdentifier="totalTipsVC" id="HoX-jA-Epq" customClass="DollarAmountViewController" customModule="CashierTips" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="totalTipsVC" id="HoX-jA-Epq" customClass="TipViewController" customModule="CashierTips" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Bv-Cf-0Xr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
