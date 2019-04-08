@@ -10,35 +10,21 @@ import UIKit
 
 class TipTrackingSheetController: UITableViewController {
 
-    // Stored properties
+    // MARK: Stored properties
     var totalTips: Double = 0.0 { didSet { tableView.reloadData() } }
-    var cashiers = [Cashier]()
+    var cashiers = [Cashier]()  { didSet { tableView.reloadData() } }
     var sections = ["Total Tips", "Cashiers"]
 
-    
-    // Computed Properties
+    // MARK: Computed Properties
     var tipRate: Double {
         return totalHoursWorked != 0 ? totalTips / totalHoursWorked : 0
     }
     var totalHoursWorked: Double {
         return cashiers.reduce(0) { $0 + $1.hoursWorked }
-        
     }
-    var totalTipsDescription: String = "TODO"
-
-//        if let totalHoursWorked = totalHoursWorked {
-//            return "Total Hours: \(totalHoursWorked), Tip Rate: \(tipRate!)"
-//        }
-//        else {
-//            return "Total Hours: 0, Tip Rate: 0"
-//        }
-
-//    {
-////        didSet {
-////            cashiers.forEach { $0.tipRate = self.tipRate! }
-////            tableView.reloadData()
-////        }
-//    }
+    var totalTipsDescription: String {
+        return "Total Hours: \(totalHoursWorked), Tip Rate: \(tipRate)"
+    }
 
 //    // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -48,9 +34,9 @@ class TipTrackingSheetController: UITableViewController {
         title = "Cashier Tips"
         
         cashiers = [
-            Cashier(name: "Kevin", hoursWorked: 1.5),
-            Cashier(name: "Jessica", hoursWorked: 4.5),
-            Cashier(name: "Calvin", hoursWorked: 7.2),
+            Cashier(name: "Kevin", hoursWorked: 2),
+            Cashier(name: "Jessica", hoursWorked: 4),
+//            Cashier(name: "Calvin", hoursWorked: 7.2),
         ]
     }
 
@@ -94,7 +80,7 @@ class TipTrackingSheetController: UITableViewController {
             cell = tableView.dequeueReusableCell(withIdentifier: "cashierCell", for: indexPath)
             let cashier = cashiers[indexPath.row]
             cell.textLabel?.text = "\(cashier.name) (\(cashier.hoursWorked) h)"
-//            cell.detailTextLabel?.text = "$\(cashier.tipAmountDescription ?? String(0))"
+            cell.detailTextLabel?.text = cashier.getTipsDescribed(rate: tipRate)
         }
 
         return cell

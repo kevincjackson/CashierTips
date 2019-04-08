@@ -22,9 +22,10 @@ class Cashier {
         return hoursWorked * rate
     }
     
-    private func getTipsDescribed(rate: Double) -> String {
+    public func getTipsDescribed(rate: Double) -> String {
         let tips = getTips(rate: rate)
-        return String(round(tips * 100) / 100)
+        let tipsRounded = round(tips * 100) / 100
+        return "$\(tipsRounded)"
     }
     
 }
