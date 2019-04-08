@@ -102,6 +102,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Cashier" id="oEr-yC-Fd2">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fj7-yK-5tH">
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="kF2-p8-cz0" id="Ihy-1r-CMk"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="cFl-9L-R2W">
                                             <connections>
                                                 <action selector="doneButtonPressed:" destination="kF2-p8-cz0" id="wDe-6n-Wqi"/>
@@ -147,6 +152,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Total Tips" id="NsF-vK-XCb">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="etI-bn-0RO">
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="HoX-jA-Epq" id="6cF-Qw-hOj"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="AI1-8Y-Wag">
                                             <connections>
                                                 <action selector="doneButtonPressed:" destination="HoX-jA-Epq" id="NRw-gS-UWj"/>

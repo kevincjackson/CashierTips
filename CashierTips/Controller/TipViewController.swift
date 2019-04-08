@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol TipViewDelegate {
-    func tipAmountUpdated(amount: Double)
-}
-
 class TipViewController: UIViewController {
     
     let dollarOptions: [String] = Array(0...999).map { String($0) }
@@ -21,6 +17,7 @@ class TipViewController: UIViewController {
     
     @IBOutlet weak var pickerView: UIPickerView!
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,13 +33,25 @@ class TipViewController: UIViewController {
         }
     }
 
+    // MARK: - Target-Actions
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         let amount: Double = selectedAmount ?? 0
         delegate?.tipAmountUpdated(amount: amount)
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
+// MARK: - TipViewDelegate
+protocol TipViewDelegate {
+    func tipAmountUpdated(amount: Double)
+}
+
+// MARK: - Picker View
 extension TipViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

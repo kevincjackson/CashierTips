@@ -35,12 +35,15 @@ class CashierViewController: UIViewController {
         pickerView.delegate = self
     }
     
-    // MARK: - Functions
+    // MARK: - Target-Actions
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         delegate?.cashierUpdated(name: name ?? "?", hoursWorked: hoursWorked ?? 0)
         dismiss(animated: true, completion: nil)
     }
-
+    
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 
