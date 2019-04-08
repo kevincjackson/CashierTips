@@ -8,14 +8,14 @@
 
 import UIKit
 
-class TipTrackingSheetController: UITableViewController {
+class MainViewController: UITableViewController {
 
-    // MARK: Stored properties
+    // Stored properties
     var totalTips: Double = 0.0 { didSet { tableView.reloadData() } }
     var cashiers = [Cashier]()  { didSet { tableView.reloadData() } }
     var sections = ["Total Tips", "Cashiers"]
 
-    // MARK: Computed Properties
+    // Computed Properties
     var tipRate: Double {
         return totalHoursWorked != 0 ? totalTips / totalHoursWorked : 0
     }
@@ -110,7 +110,7 @@ class TipTrackingSheetController: UITableViewController {
 
 
 // MARK: - DollarAmountViewDelegate
-extension TipTrackingSheetController: DollarAmountViewDelegate {
+extension MainViewController: DollarAmountViewDelegate {
     func dollarAmountUpdated(amount: Double) {
         totalTips = amount
     }
@@ -118,7 +118,7 @@ extension TipTrackingSheetController: DollarAmountViewDelegate {
 
 
 // MARK: - CashierDelegate
-extension TipTrackingSheetController: CashierDelegate {
+extension MainViewController: CashierDelegate {
     func cashierUpdated(name: String, hoursWorked: Double) {
         if let row = self.tableView.indexPathForSelectedRow?.row {
             print(String(row))
