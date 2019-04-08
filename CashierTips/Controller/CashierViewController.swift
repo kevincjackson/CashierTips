@@ -18,18 +18,16 @@ class CashierViewController: UIViewController {
     
     // Computed Properties
     var nameEntered: String {
-        var name: String
         if let nameEntered = textField.text, !nameEntered.isEmpty {
-            name = nameEntered
+            return nameEntered
         }
         else {
-            name = "?"
+            return "?"
         }
-        return name
     }
     var hoursSelected: Double {
-        let hrs = pickerView.selectedRow(inComponent: 0)
-        let subhrs = pickerView.selectedRow(inComponent: 2)
+        let hrs = hoursOptions[pickerView.selectedRow(inComponent: 0)]
+        let subhrs = subHoursOptions[pickerView.selectedRow(inComponent: 2)]
         return Double("\(hrs).\(subhrs)")!
     }
     
@@ -44,12 +42,22 @@ class CashierViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        // Set new / edit flag
-        isNew = (cashier == nil)
-
-        // Set up hours pickerView
+        // Set up basic pickerView
         pickerView.dataSource = self
         pickerView.delegate = self
+        
+        // Set up new cashier
+        if cashier == nil {
+            isNew = true
+        }
+        
+        // Set up existing cashier
+        else {
+            isNew = false
+            textField.text = cashier!.name
+            pickerView.selectRow(Int(cashier!.hoursWorked), inComponent: 0, animated: false)
+            pickerView.selectRow(Int(cashier!.hoursWorked * 100) % 100, inComponent: 2, animated: false)
+        }
     }
     
     // MARK: - Target-Actions

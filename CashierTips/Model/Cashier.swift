@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Cashier {
+struct Cashier {
     
     var name: String
     var hoursWorked: Double

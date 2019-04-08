@@ -126,15 +126,16 @@ extension MainViewController: TipViewDelegate {
 // MARK: - CashierDelegate
 extension MainViewController: CashierDelegate {
     func cashierUpdated(cashier: Cashier, isNew: Bool) {
+        
+        // Add new cashier
         if isNew {
            cashiers.append(cashier)
         }
+        // Replace existing cashier
         else {
-            // TODO
-            print("TODO NOT A NEW CASHIER")
+            cashiers[tableView.indexPathForSelectedRow!.row] = cashier
         }
     }
     
-
 }
 
