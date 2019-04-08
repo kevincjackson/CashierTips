@@ -11,13 +11,27 @@ import UIKit
 class CashierViewController: UIViewController {
     
     // Stored Properties
-    // Picker Properties
-    let hours: [String] = Array(0...23).map { String($0) }
-    let subHours: [String] = Constants.ZeroToNinetyNinePadded
+    var cashier: Cashier?
+    var isNew = false
+    let hoursOptions: [String] = Array(0...23).map { String($0) }
+    let subHoursOptions: [String] = Constants.ZeroToNinetyNinePadded
     
-    // Cashier Properties
-    var name: String?
-    var hoursWorked: Double?
+    // Computed Properties
+    var nameEntered: String {
+        var name: String
+        if let nameEntered = textField.text, !nameEntered.isEmpty {
+            name = nameEntered
+        }
+        else {
+            name = "?"
+        }
+        return name
+    }
+    var hoursSelected: Double {
+        let hrs = pickerView.selectedRow(inComponent: 0)
+        let subhrs = pickerView.selectedRow(inComponent: 2)
+        return Double("\(hrs).\(subhrs)")!
+    }
     
     // Delegates
     var delegate: CashierDelegate?
@@ -29,6 +43,9 @@ class CashierViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        // Set new / edit flag
+        isNew = (cashier == nil)
 
         // Set up hours pickerView
         pickerView.dataSource = self
@@ -37,7 +54,8 @@ class CashierViewController: UIViewController {
     
     // MARK: - Target-Actions
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        delegate?.cashierUpdated(name: name ?? "?", hoursWorked: hoursWorked ?? 0)
+        let cashier = Cashier(name: nameEntered, hoursWorked: hoursSelected)
+        delegate?.cashierUpdated(cashier: cashier, isNew: isNew)
         dismiss(animated: true, completion: nil)
     }
     
@@ -49,7 +67,7 @@ class CashierViewController: UIViewController {
 
 // MARK: - Cashier Delegate
 protocol CashierDelegate {
-    func cashierUpdated(name: String, hoursWorked: Double)
+    func cashierUpdated(cashier: Cashier, isNew: Bool)
 }
 
 
@@ -61,13 +79,13 @@ extension CashierViewController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return hours.count
+            return hoursOptions.count
         }
         else if component == 1 {
             return 1
         }
         else if component == 2 {
-            return subHours.count
+            return subHoursOptions.count
         }
         else {
             return 1
@@ -80,13 +98,13 @@ extension CashierViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if component == 0 {
-            return hours[row]
+            return hoursOptions[row]
         }
         else if component == 1 {
             return "."
         }
         else if component == 2 {
-            return subHours[row]
+            return subHoursOptions[row]
         }
         else {
             return "hours"
@@ -106,14 +124,6 @@ extension CashierViewController: UIPickerViewDelegate {
         else {
             return 100
         }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        let hrs = hours[pickerView.selectedRow(inComponent: 0)]
-        let sub = subHours[pickerView.selectedRow(inComponent: 2)]
-        
-        hoursWorked =  Double("\(hrs).\(sub)")
     }
 }
 

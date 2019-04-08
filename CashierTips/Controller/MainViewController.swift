@@ -41,15 +41,23 @@ class MainViewController: UITableViewController {
             totalTipsVC.delegate = self
             totalTipsVC.selectedAmount = totalTips
         }
-        else {
+        else if segue.identifier == "newCashier" {
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
+        }
+        else if segue.identifier == "editCashier"{
+            let cashierVC = segue.destination as! CashierViewController
+            cashierVC.delegate = self
+            cashierVC.cashier = cashiers[tableView.indexPathForSelectedRow!.row]
+        }
+        else {
+            print("Unknown segue identifier")
         }
     }
     
     // MARK: - Target-Actions
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "gotoCashierView", sender: self)
+        performSegue(withIdentifier: "newCashier", sender: self)
     }
 
     // MARK: - Tableview
@@ -101,7 +109,7 @@ class MainViewController: UITableViewController {
             performSegue(withIdentifier: "gotoTipView", sender: self)
         }
         else {
-            performSegue(withIdentifier: "gotoCashierView", sender: self)
+            performSegue(withIdentifier: "editCashier", sender: self)
         }
     }
 }
@@ -117,13 +125,16 @@ extension MainViewController: TipViewDelegate {
 
 // MARK: - CashierDelegate
 extension MainViewController: CashierDelegate {
-    func cashierUpdated(name: String, hoursWorked: Double) {
-        if let row = self.tableView.indexPathForSelectedRow?.row {
-            print(String(row))
+    func cashierUpdated(cashier: Cashier, isNew: Bool) {
+        if isNew {
+           cashiers.append(cashier)
         }
         else {
-            print("No row selected")
+            // TODO
+            print("TODO NOT A NEW CASHIER")
         }
     }
+    
+
 }
 
