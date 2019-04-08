@@ -73,10 +73,12 @@
                             <outlet property="dataSource" destination="BYZ-38-t0r" id="uVn-Kf-lTa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="qVX-QD-ab0"/>
+                    <navigationItem key="navigationItem" id="qVX-QD-ab0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="V2p-We-h2B"/>
+                    </navigationItem>
                     <connections>
-                        <segue destination="HoX-jA-Epq" kind="presentation" identifier="gotoTotalTips" id="NNh-b1-ENO"/>
-                        <segue destination="kF2-p8-cz0" kind="presentation" identifier="gotoCashier" id="Kej-QY-bD8"/>
+                        <segue destination="HoX-jA-Epq" kind="presentation" identifier="gotoTipView" id="NNh-b1-ENO"/>
+                        <segue destination="kF2-p8-cz0" kind="presentation" identifier="gotoCashierView" id="Kej-QY-bD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -104,7 +106,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cashier Name" textAlignment="center" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="TXm-6b-M08">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="36" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TXm-6b-M08">
                                 <rect key="frame" x="20" y="111" width="335" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>

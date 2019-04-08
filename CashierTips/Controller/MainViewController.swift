@@ -32,16 +32,10 @@ class MainViewController: UITableViewController {
 
         // Set nav title
         title = "Cashier Tips"
-        
-        cashiers = [
-            Cashier(name: "Kevin", hoursWorked: 2),
-            Cashier(name: "Jessica", hoursWorked: 4),
-//            Cashier(name: "Calvin", hoursWorked: 7.2),
-        ]
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "gotoTotalTips" {
+        if segue.identifier == "gotoTipView" {
             let totalTipsVC = segue.destination as! TipViewController
             totalTipsVC.delegate = self
             totalTipsVC.selectedAmount = totalTips
@@ -49,8 +43,6 @@ class MainViewController: UITableViewController {
         else {
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
-//            let cashier = cashiers[tableView.indexPathForSelectedRow!.row]
-//            print(cashier.name)
         }
     }
 
@@ -100,10 +92,10 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if indexPath.section == 0 {
-            performSegue(withIdentifier: "gotoTotalTips", sender: self)
+            performSegue(withIdentifier: "gotoTipView", sender: self)
         }
         else {
-            performSegue(withIdentifier: "gotoCashier", sender: self)
+            performSegue(withIdentifier: "gotoCashierView", sender: self)
         }
     }
 }
