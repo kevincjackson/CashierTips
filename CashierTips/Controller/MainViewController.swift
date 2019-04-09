@@ -23,7 +23,9 @@ class MainViewController: UITableViewController {
         return cashiers.reduce(0) { $0 + $1.hoursWorked }
     }
     var totalTipsDescription: String {
-        return "Total Hours: \(totalHoursWorked), Tip Rate: \(tipRate)"
+        let thw = String(format: "%.2f", totalHoursWorked)
+        let tr = String(format: "%.3f", tipRate)
+        return "Total Hours: \(thw), Tip Rate: \(tr)"
     }
     
     
@@ -81,13 +83,13 @@ class MainViewController: UITableViewController {
 
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "totalTipsCell", for: indexPath)
-            cell.textLabel?.text = "$\(totalTips)"
+            cell.textLabel?.text = String(format: "$%.2f", totalTips)
             cell.detailTextLabel?.text = totalTipsDescription
         }
         else {
             cell = tableView.dequeueReusableCell(withIdentifier: "cashierCell", for: indexPath)
             let cashier = cashiers[indexPath.row]
-            cell.textLabel?.text = "\(cashier.name) (\(cashier.hoursWorked) h)"
+            cell.textLabel?.text = cashier.name + String(format: " (%.2f h)", cashier.hoursWorked)
             cell.detailTextLabel?.text = cashier.getTipsDescribed(rate: tipRate)
         }
 

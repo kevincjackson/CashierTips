@@ -17,15 +17,10 @@ struct Cashier {
         self.name = name
         self.hoursWorked = hoursWorked
     }
-    
-    private func getTips(rate: Double) -> Double {
-        return hoursWorked * rate
-    }
-    
+
     public func getTipsDescribed(rate: Double) -> String {
-        let tips = getTips(rate: rate)
-        let tipsRounded = round(tips * 100) / 100
-        return "$\(tipsRounded)"
+        let tips = hoursWorked * rate
+        return String(format: "$%.2f", tips)
     }
     
 }
