@@ -11,8 +11,8 @@ import UIKit
 class MainViewController: UITableViewController {
 
     // Stored properties
-    var totalTips: Double = 0.0 { didSet { tableView.reloadData() } }
-    var cashiers = [Cashier]()  { didSet { tableView.reloadData() } }
+    var totalTips: Double = 0.0
+    var cashiers = [Cashier]()
     var sections = ["Total Tips", "Cashiers"]
 
     // Computed Properties
@@ -78,7 +78,7 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+    
         var cell: UITableViewCell
 
         if indexPath.section == 0 {
@@ -108,12 +108,27 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         if indexPath.section == 0 {
             performSegue(withIdentifier: "gotoTipView", sender: self)
         }
         else {
             performSegue(withIdentifier: "editCashier", sender: self)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            if indexPath.section == 0 {
+                totalTips = 0.0
+                tableView.reloadData()
+            }
+            else {
+                cashiers.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+
         }
     }
 }
@@ -122,7 +137,12 @@ class MainViewController: UITableViewController {
 // MARK: - DollarAmountViewDelegate
 extension MainViewController: TipViewDelegate {
     func tipAmountUpdated(amount: Double) {
+        
+        // Update model
         totalTips = amount
+        
+        // Update view
+        tableView.reloadData()
     }
 }
 
@@ -139,6 +159,9 @@ extension MainViewController: CashierDelegate {
         else {
             cashiers[tableView.indexPathForSelectedRow!.row] = cashier
         }
+        
+        // Update view
+        tableView.reloadData()
     }
     
 }
