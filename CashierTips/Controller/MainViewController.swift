@@ -64,7 +64,7 @@ class MainViewController: UITableViewController {
 
     // MARK: - Helper Functions
 
-    // MARK: - Tableview
+    // MARK: - TableView Datasource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -107,15 +107,7 @@ class MainViewController: UITableViewController {
         return Constants.HeaderFontSize + Constants.Padding
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 0 {
-            performSegue(withIdentifier: "gotoTipView", sender: self)
-        }
-        else {
-            performSegue(withIdentifier: "editCashier", sender: self)
-        }
-    }
+
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -127,11 +119,24 @@ class MainViewController: UITableViewController {
             else {
                 cashiers.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.reloadData()
             }
 
         }
     }
+    
+    // MARK: - TableView Datasource
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            performSegue(withIdentifier: "gotoTipView", sender: self)
+        }
+        else {
+            performSegue(withIdentifier: "editCashier", sender: self)
+        }
+    }
 }
+
 
 
 // MARK: - DollarAmountViewDelegate
