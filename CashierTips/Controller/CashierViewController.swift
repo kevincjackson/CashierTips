@@ -18,12 +18,10 @@ class CashierViewController: UIViewController {
     
     // Computed Properties
     var nameEntered: String {
-        if let nameEntered = textField.text, !nameEntered.isEmpty {
-            return nameEntered
-        }
-        else {
+        guard let nameEntered = textField.text, !nameEntered.isEmpty else {
             return "?"
         }
+        return nameEntered
     }
     var hoursSelected: Double {
         let hrs = hoursOptions[pickerView.selectedRow(inComponent: 0)]
