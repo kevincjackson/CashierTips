@@ -33,7 +33,8 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Set nav title
+        // Customize navigation
+        navigationController?.navigationBar.prefersLargeTitles = true
         title = "Cashier Tips"
     }
     
