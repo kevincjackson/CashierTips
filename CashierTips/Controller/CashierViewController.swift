@@ -12,6 +12,7 @@ class CashierViewController: UIViewController {
     
     // Stored Properties
     var cashier: Cashier?
+    var cashierIndex = 0
     var isNew = false
     let hoursOptions: [String] = Array(0...23).map { String($0) }
     let subHoursOptions: [String] = Constants.ZeroToNinetyNinePadded
@@ -64,8 +65,9 @@ class CashierViewController: UIViewController {
             showEmptyCashierAlert()
         }
         else {
-            delegate?.cashierUpdated(cashier: cashier, isNew: isNew)
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: {
+                self.delegate?.cashierUpdated(cashier: cashier, isNew: self.isNew, cashierIndex: self.cashierIndex)
+            })
         }
     }
     
@@ -94,7 +96,7 @@ class CashierViewController: UIViewController {
 
 // MARK: - Cashier Delegate
 protocol CashierDelegate {
-    func cashierUpdated(cashier: Cashier, isNew: Bool)
+    func cashierUpdated(cashier: Cashier, isNew: Bool, cashierIndex: Int)
 }
 
 

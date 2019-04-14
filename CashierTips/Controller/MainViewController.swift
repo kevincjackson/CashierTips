@@ -52,6 +52,7 @@ class MainViewController: UITableViewController {
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
             cashierVC.cashier = cashiers[tableView.indexPathForSelectedRow!.row]
+            cashierVC.cashierIndex = tableView.indexPathForSelectedRow!.row
         }
         else {
             print("Unknown segue identifier")
@@ -155,19 +156,24 @@ extension MainViewController: TipViewDelegate {
 
 // MARK: - CashierDelegate
 extension MainViewController: CashierDelegate {
-    func cashierUpdated(cashier: Cashier, isNew: Bool) {
+    func cashierUpdated(cashier: Cashier, isNew: Bool, cashierIndex: Int) {
         
         // Add new cashier
         if isNew {
             cashiers.append(cashier)
+            let indexPath = IndexPath(row: (cashiers.count - 1), section: 1)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+            
         }
         // Replace existing cashier
         else {
-            cashiers[tableView.indexPathForSelectedRow!.row] = cashier
+            cashiers[cashierIndex] = cashier
         }
         
-        // Update view
-        tableView.reloadData()
+        UIView.transition(with: tableView,
+                          duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tableView.reloadData() })
     }
     
 }
