@@ -13,7 +13,6 @@ class WorldState {
     // Stored properties
     var totalTips: Double = 0.0
     var cashiers = [Cashier]()
-    var sections = ["Total Tips", "Cashiers"]
     
     // Computed Properties
     var tipRate: Double {
@@ -32,10 +31,7 @@ class WorldState {
         cashiers.append(cashier)
     }
     
-    public func removeCashier(cashier: Cashier) {
-        guard let index = cashiers.firstIndex(of: cashier) else {
-            return
-        }
+    public func removeCashier(at index: Int) {
         cashiers.remove(at: index)
     }
     

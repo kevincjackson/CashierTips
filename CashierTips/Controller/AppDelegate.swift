@@ -13,9 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Inject World State
+        let navVC = window?.rootViewController as! UINavigationController
+        let mainVC = navVC.viewControllers.first as! MainViewController
+        mainVC.worldState = WorldState()
+        
         return true
     }
 

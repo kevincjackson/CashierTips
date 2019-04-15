@@ -10,28 +10,13 @@ import UIKit
 
 class MainViewController: UITableViewController {
 
-    // Stored properties
-    var totalTips: Double = 0.0
-    var cashiers = [Cashier]()
+    var worldState: WorldState!
     var sections = ["Total Tips", "Cashiers"]
-
-    // Computed Properties
-    var tipRate: Double {
-        return totalHoursWorked != 0 ? totalTips / totalHoursWorked : 0
-    }
-    var totalHoursWorked: Double {
-        return cashiers.reduce(0) { $0 + $1.hoursWorked }
-    }
-    var totalTipsDescription: String {
-        let thw = String(format: "%.2f", totalHoursWorked)
-        let tr = String(format: "%.3f", tipRate)
-        return "Total Hours: \(thw), Tip Rate: \(tr)"
-    }
     
 //    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Customize navigation
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Cashier Tips"
@@ -41,7 +26,7 @@ class MainViewController: UITableViewController {
         if segue.identifier == "gotoTipView" {
             let totalTipsVC = segue.destination as! TipViewController
             totalTipsVC.delegate = self
-            totalTipsVC.selectedAmount = totalTips
+            totalTipsVC.selectedAmount = worldState.totalTips
         }
         else if segue.identifier == "newCashier" {
             let cashierVC = segue.destination as! CashierViewController
@@ -50,7 +35,7 @@ class MainViewController: UITableViewController {
         else if segue.identifier == "editCashier"{
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
-            cashierVC.cashier = cashiers[tableView.indexPathForSelectedRow!.row]
+            cashierVC.cashier = worldState.cashiers[tableView.indexPathForSelectedRow!.row]
             cashierVC.cashierIndex = tableView.indexPathForSelectedRow!.row
         }
         else {
@@ -81,7 +66,7 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : cashiers.count
+        return section == 0 ? 1 : worldState.cashiers.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,14 +75,14 @@ class MainViewController: UITableViewController {
 
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "totalTipsCell", for: indexPath)
-            cell.textLabel?.text = String(format: "$%.2f", totalTips)
-            cell.detailTextLabel?.text = totalTipsDescription
+            cell.textLabel?.text = String(format: "$%.2f", worldState.totalTips)
+            cell.detailTextLabel?.text = worldState.totalTipsDescription
         }
         else {
             cell = tableView.dequeueReusableCell(withIdentifier: "cashierCell", for: indexPath)
-            let cashier = cashiers[indexPath.row]
+            let cashier = worldState.cashiers[indexPath.row]
             cell.textLabel?.text = cashier.name + String(format: " (%.2f h)", cashier.hoursWorked)
-            cell.detailTextLabel?.text = cashier.getTipsDescribed(rate: tipRate)
+            cell.detailTextLabel?.text = cashier.getTipsDescribed(rate: worldState.tipRate)
         }
 
         return cell
@@ -118,11 +103,11 @@ class MainViewController: UITableViewController {
         if editingStyle == .delete {
             
             if indexPath.section == 0 {
-                totalTips = 0.0
+                worldState.totalTips = 0.0
                 animateTableViewReloadData()
             }
             else {
-                cashiers.remove(at: indexPath.row)
+                worldState.removeCashier(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 
                 // Add delay to allow for the row deletion
@@ -153,7 +138,7 @@ extension MainViewController: TipViewDelegate {
     func tipAmountUpdated(amount: Double) {
         
         // Update model
-        totalTips = amount
+        worldState.totalTips = amount
         
         // Update view
         animateTableViewReloadData()
@@ -168,14 +153,14 @@ extension MainViewController: CashierDelegate {
         
         // Add new cashier
         if isNew {
-            cashiers.append(cashier)
-            let indexPath = IndexPath(row: (cashiers.count - 1), section: 1)
+            worldState.addCashier(cashier: cashier)
+            let indexPath = IndexPath(row: (worldState.cashiers.count - 1), section: 1)
             tableView.insertRows(at: [indexPath], with: .automatic)
             
         }
         // Replace existing cashier
         else {
-            cashiers[cashierIndex] = cashier
+            worldState.cashiers[cashierIndex] = cashier
         }
         
         animateTableViewReloadData()
