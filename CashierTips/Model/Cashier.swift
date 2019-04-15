@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Cashier {
+class Cashier: NSObject {
     
     var name: String
     var hoursWorked: Double

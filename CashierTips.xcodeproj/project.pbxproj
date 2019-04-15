@@ -14,6 +14,7 @@
 		0A5A57872256B11200D669C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5A57852256B11200D669C2 /* LaunchScreen.storyboard */; };
 		0A5A578F2256B1E400D669C2 /* Cashier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A578E2256B1E400D669C2 /* Cashier.swift */; };
 		0A6689E322593DED00BBFCCC /* CashierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6689E222593DED00BBFCCC /* CashierViewController.swift */; };
+		0AD14C45226503D400F3D833 /* WorldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD14C44226503D400F3D833 /* WorldState.swift */; };
 		0AD61DFE225B188700A403E3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A577E2256B11100D669C2 /* MainViewController.swift */; };
 		0AD61E00225B1FDD00A403E3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD61DFF225B1FDD00A403E3 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +30,7 @@
 		0A5A57882256B11200D669C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A5A578E2256B1E400D669C2 /* Cashier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cashier.swift; sourceTree = "<group>"; };
 		0A6689E222593DED00BBFCCC /* CashierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierViewController.swift; sourceTree = "<group>"; };
+		0AD14C44226503D400F3D833 /* WorldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldState.swift; sourceTree = "<group>"; };
 		0AD61DFF225B1FDD00A403E3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +77,7 @@
 		0A6689E4225950A800BBFCCC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0AD14C44226503D400F3D833 /* WorldState.swift */,
 				0A5A578E2256B1E400D669C2 /* Cashier.swift */,
 				0AD61DFF225B1FDD00A403E3 /* Constants.swift */,
 			);
@@ -174,6 +177,7 @@
 				0A4F684622588A4F00BFDADB /* TipViewController.swift in Sources */,
 				0A5A578F2256B1E400D669C2 /* Cashier.swift in Sources */,
 				0A5A577D2256B11100D669C2 /* AppDelegate.swift in Sources */,
+				0AD14C45226503D400F3D833 /* WorldState.swift in Sources */,
 				0A6689E322593DED00BBFCCC /* CashierViewController.swift in Sources */,
 				0AD61DFE225B188700A403E3 /* MainViewController.swift in Sources */,
 				0AD61E00225B1FDD00A403E3 /* Constants.swift in Sources */,
