@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UITableViewController {
-
+    
     var worldState: WorldState!
     var sections = ["Total Tips", "Cashiers"]
     
@@ -61,10 +61,6 @@ class MainViewController: UITableViewController {
         return 2
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? 1 : worldState.cashiers.count
     }
@@ -88,16 +84,6 @@ class MainViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-
-        // Header text
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.systemFont(ofSize: Constants.HeaderFontSize)
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Constants.HeaderFontSize + Constants.Padding
-    }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -116,11 +102,66 @@ class MainViewController: UITableViewController {
                         afterDelay: 0.4
                 )
             }
+        }
+        
+    }
+    
+    // MARK: Headers
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        // Header text
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont.systemFont(ofSize: Constants.HeaderFontSize)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Constants.HeaderFontSize + Constants.Padding
+    }
+    
+    // MARK: Footers
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 0 {
+            return nil
+        }
+        else {
+            if worldState.cashiers.isEmpty {
+                let footerView = UITableViewHeaderFooterView()
+                footerView.backgroundView = UIView(frame: footerView.bounds)
+                footerView.backgroundView?.backgroundColor = UIColor.white
+                footerView.textLabel?.text = "No cashiers. Press '+' to add cashiers."
 
+                return footerView
+            }
+            else {
+                return nil
+            }
         }
     }
     
-    // MARK: - TableView Datasource
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+            let footerView = view as! UITableViewHeaderFooterView
+            footerView.textLabel?.textColor = UIColor.lightGray
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
+        else {
+            if worldState.cashiers.isEmpty {
+                return 60
+            }
+            else {
+                return 0
+            }
+        }
+    }
+    
+    // MARK: - TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
