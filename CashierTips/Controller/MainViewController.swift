@@ -28,7 +28,6 @@ class MainViewController: UITableViewController {
         return "Total Hours: \(thw), Tip Rate: \(tr)"
     }
     
-    
 //    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +64,13 @@ class MainViewController: UITableViewController {
     }
 
     // MARK: - Helper Functions
-
+    @objc fileprivate func animateTableViewReloadData() {
+        UIView.transition(with: tableView,
+                          duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tableView.reloadData() })
+    }
+    
     // MARK: - TableView Datasource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -109,19 +114,22 @@ class MainViewController: UITableViewController {
         return Constants.HeaderFontSize + Constants.Padding
     }
 
-
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
             if indexPath.section == 0 {
                 totalTips = 0.0
-                tableView.reloadData()
+                animateTableViewReloadData()
             }
             else {
                 cashiers.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-                tableView.reloadData()
+                
+                // Add delay to allow for the row deletion
+                perform(#selector(animateTableViewReloadData),
+                        with: nil,
+                        afterDelay: 0.4
+                )
             }
 
         }
@@ -140,7 +148,6 @@ class MainViewController: UITableViewController {
 }
 
 
-
 // MARK: - DollarAmountViewDelegate
 extension MainViewController: TipViewDelegate {
     func tipAmountUpdated(amount: Double) {
@@ -149,13 +156,14 @@ extension MainViewController: TipViewDelegate {
         totalTips = amount
         
         // Update view
-        tableView.reloadData()
+        animateTableViewReloadData()
     }
 }
 
 
 // MARK: - CashierDelegate
 extension MainViewController: CashierDelegate {
+    
     func cashierUpdated(cashier: Cashier, isNew: Bool, cashierIndex: Int) {
         
         // Add new cashier
@@ -170,10 +178,7 @@ extension MainViewController: CashierDelegate {
             cashiers[cashierIndex] = cashier
         }
         
-        UIView.transition(with: tableView,
-                          duration: 0.4,
-                          options: .transitionCrossDissolve,
-                          animations: { self.tableView.reloadData() })
+        animateTableViewReloadData()
     }
     
 }

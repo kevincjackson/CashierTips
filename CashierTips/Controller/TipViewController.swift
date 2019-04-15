@@ -36,8 +36,9 @@ class TipViewController: UIViewController {
     // MARK: - Target-Actions
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         let amount: Double = selectedAmount ?? 0
-        delegate?.tipAmountUpdated(amount: amount)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            self.delegate?.tipAmountUpdated(amount: amount)
+        })
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
