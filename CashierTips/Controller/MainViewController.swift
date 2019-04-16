@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
     var worldState: WorldState!
     var sections = ["Total Tips", "Cashiers"]
     
@@ -47,7 +49,18 @@ class MainViewController: UITableViewController {
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "newCashier", sender: self)
     }
-
+    
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        if isEditing {
+            setEditing(false, animated: true)
+            editButton.title = "Edit"
+        }
+        else {
+            setEditing(true, animated: true)
+            editButton.title = "Done"
+        }
+    }
+    
     // MARK: - Helper Functions
     @objc fileprivate func animateTableViewReloadData() {
         UIView.transition(with: tableView,
@@ -106,6 +119,18 @@ class MainViewController: UITableViewController {
         
     }
     
+    // MARK: Moving Rows
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0 ? false : true
+    }
+        
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        worldState.moveCashier(
+            from: sourceIndexPath.row,
+            to: destinationIndexPath.row
+        )
+    }
+    
     // MARK: Headers
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
@@ -132,11 +157,12 @@ class MainViewController: UITableViewController {
                 let footerView = UITableViewHeaderFooterView()
                 footerView.backgroundView = UIView(frame: footerView.bounds)
                 footerView.backgroundView?.backgroundColor = UIColor.white
-                footerView.textLabel?.text = "No cashiers. Press '+' to add cashiers."
+                footerView.textLabel?.text = "Tap '+' to add cashiers."
 
                 return footerView
             }
             else {
+                
                 return nil
             }
         }
@@ -160,6 +186,7 @@ class MainViewController: UITableViewController {
             }
         }
     }
+ 
     
     // MARK: - TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -171,6 +198,7 @@ class MainViewController: UITableViewController {
             performSegue(withIdentifier: "editCashier", sender: self)
         }
     }
+
 }
 
 

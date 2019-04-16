@@ -74,6 +74,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="qVX-QD-ab0">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="hN0-e3-zPG">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="BYZ-38-t0r" id="q9V-j1-wFc"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="V2p-We-h2B">
                             <connections>
                                 <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="jEg-q0-IXp"/>
@@ -81,6 +86,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="hN0-e3-zPG" id="ZZc-UQ-JzZ"/>
                         <segue destination="HoX-jA-Epq" kind="presentation" identifier="gotoTipView" id="NNh-b1-ENO"/>
                         <segue destination="kF2-p8-cz0" kind="presentation" identifier="newCashier" id="Kej-QY-bD8"/>
                         <segue destination="kF2-p8-cz0" kind="presentation" identifier="editCashier" id="1nZ-aV-eke"/>
