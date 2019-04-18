@@ -9,56 +9,40 @@
 import UIKit
 
 class MainViewController: UITableViewController {
-    
-    @IBOutlet weak var editButton: UIBarButtonItem!
-    
+        
     var worldState: WorldState!
     var sections = ["Total Tips", "Cashiers"]
     
-//    // MARK: - View Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Customize navigation
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.leftBarButtonItem = editButtonItem
         title = "Cashier Tips"
     }
-    
+
+    // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "gotoTipView" {
+        switch segue.identifier {
+        case "gotoTipView":
             let totalTipsVC = segue.destination as! TipViewController
             totalTipsVC.delegate = self
             totalTipsVC.selectedAmount = worldState.totalTips
-        }
-        else if segue.identifier == "newCashier" {
+        case "newCashier":
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
-        }
-        else if segue.identifier == "editCashier"{
+        case "editCashier":
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
             cashierVC.cashier = worldState.cashiers[tableView.indexPathForSelectedRow!.row]
             cashierVC.cashierIndex = tableView.indexPathForSelectedRow!.row
-        }
-        else {
-            print("Unknown segue identifier")
+        default:
+            preconditionFailure("Unknown segue identifier.")
         }
     }
     
     // MARK: - Target-Actions
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "newCashier", sender: self)
-    }
-    
-    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
-        if isEditing {
-            setEditing(false, animated: true)
-            editButton.title = "Edit"
-        }
-        else {
-            setEditing(true, animated: true)
-            editButton.title = "Done"
-        }
     }
     
     // MARK: - Helper Functions
@@ -157,12 +141,11 @@ class MainViewController: UITableViewController {
                 let footerView = UITableViewHeaderFooterView()
                 footerView.backgroundView = UIView(frame: footerView.bounds)
                 footerView.backgroundView?.backgroundColor = UIColor.white
-                footerView.textLabel?.text = "Tap '+' to add cashiers."
+                footerView.textLabel?.text = "Press '+' to add cashiers."
 
                 return footerView
             }
             else {
-                
                 return nil
             }
         }
