@@ -9,7 +9,7 @@
 import Foundation
 
 class Cashier: NSObject {
-    
+
     var name: String
     var hoursWorked: Double
     
@@ -20,7 +20,7 @@ class Cashier: NSObject {
 
     public func getTipsDescribed(rate: Double) -> String {
         let tips = hoursWorked * rate
-        return String(format: "$%.2f", tips)
+        return CurrencyFormatter().stringFrom(double: tips)
     }
     
 }

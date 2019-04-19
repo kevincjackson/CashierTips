@@ -17,6 +17,7 @@
 		0AD14C45226503D400F3D833 /* WorldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD14C44226503D400F3D833 /* WorldState.swift */; };
 		0AD61DFE225B188700A403E3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A577E2256B11100D669C2 /* MainViewController.swift */; };
 		0AD61E00225B1FDD00A403E3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD61DFF225B1FDD00A403E3 /* Constants.swift */; };
+		0AF0C1F0226A73D70051A378 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0A6689E222593DED00BBFCCC /* CashierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierViewController.swift; sourceTree = "<group>"; };
 		0AD14C44226503D400F3D833 /* WorldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldState.swift; sourceTree = "<group>"; };
 		0AD61DFF225B1FDD00A403E3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				0AD14C44226503D400F3D833 /* WorldState.swift */,
 				0A5A578E2256B1E400D669C2 /* Cashier.swift */,
 				0AD61DFF225B1FDD00A403E3 /* Constants.swift */,
+				0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4F684622588A4F00BFDADB /* TipViewController.swift in Sources */,
+				0AF0C1F0226A73D70051A378 /* CurrencyFormatter.swift in Sources */,
 				0A5A578F2256B1E400D669C2 /* Cashier.swift in Sources */,
 				0A5A577D2256B11100D669C2 /* AppDelegate.swift in Sources */,
 				0AD14C45226503D400F3D833 /* WorldState.swift in Sources */,
