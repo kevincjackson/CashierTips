@@ -10,6 +10,10 @@ import UIKit
 
 class CashierViewController: UIViewController {
     
+    // View Pointers
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
     // Stored Properties
     var cashier: Cashier?
     var cashierIndex = 0
@@ -32,32 +36,39 @@ class CashierViewController: UIViewController {
     
     // Delegates
     var delegate: CashierDelegate?
-    
-    // View Pointers
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var pickerView: UIPickerView!
+
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // Set up basic pickerView
-        pickerView.dataSource = self
-        pickerView.delegate = self
         
         // Set up new cashier
         if cashier == nil {
             isNew = true
+            textField.becomeFirstResponder()
         }
         
         // Set up existing cashier
         else {
             isNew = false
-            textField.text = cashier!.name
+            
+            // Bring up keyboard if name is empty
+            if cashier!.name == "?" {
+                textField.text = ""
+                textField.becomeFirstResponder()
+            }
+            else {
+                textField.text = cashier!.name
+            }
             selectHoursInPickerView(hours: cashier!.hoursWorked)
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
+    
     // MARK: - Target-Actions
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         let cashier = Cashier(name: nameEntered, hoursWorked: hoursSelected)
@@ -73,6 +84,10 @@ class CashierViewController: UIViewController {
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
     // MARK: - Helper Functions
@@ -99,6 +114,13 @@ protocol CashierDelegate {
     func cashierUpdated(cashier: Cashier, isNew: Bool, cashierIndex: Int)
 }
 
+// MARK: - TextFieldDelegate
+extension CashierViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
 
 // MARK: - Picker DataSource
 extension CashierViewController: UIPickerViewDataSource {

@@ -120,9 +120,16 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kF2-p8-cz0" id="iZi-m6-ObM"/>
+                                </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ehc-aJ-GdF">
                                 <rect key="frame" x="20" y="155" width="335" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="kF2-p8-cz0" id="DSs-ZU-qTJ"/>
+                                    <outlet property="delegate" destination="kF2-p8-cz0" id="i5i-Rv-zqC"/>
+                                </connections>
                             </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7o-Kc-FPe">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -130,6 +137,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="vx4-5I-EOt" firstAttribute="trailing" secondItem="Ehc-aJ-GdF" secondAttribute="trailing" constant="20" id="1yx-4A-eNL"/>
                             <constraint firstItem="Vo7-zA-s3x" firstAttribute="top" secondItem="vx4-5I-EOt" secondAttribute="top" id="5PU-4c-YSK"/>
@@ -146,6 +154,9 @@
                             <constraint firstItem="TXm-6b-M08" firstAttribute="leading" secondItem="vx4-5I-EOt" secondAttribute="leading" constant="20" id="vXx-Aj-HuF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vx4-5I-EOt"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="uz6-lx-V30" appends="YES" id="bDo-gV-vWF"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="pickerView" destination="Ehc-aJ-GdF" id="82D-8F-nF5"/>
@@ -153,6 +164,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ze3-r9-Ga7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="uz6-lx-V30">
+                    <connections>
+                        <action selector="viewTapped:" destination="kF2-p8-cz0" id="Uqs-u7-PRj"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1893.5999999999999" y="472.90640394088672"/>
         </scene>
