@@ -15,6 +15,8 @@ class CashierViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     
     // Stored Properties
+    var delegate: CashierDelegate?
+
     var cashier: Cashier?
     var cashierIndex = 0
     var isNew = false
@@ -23,10 +25,12 @@ class CashierViewController: UIViewController {
     
     // Computed Properties
     var nameEntered: String {
-        guard let nameEntered = textField.text, !nameEntered.isEmpty else {
+        if let nameEntered = textField.text, !nameEntered.isEmpty {
+            return nameEntered
+        }
+        else {
             return "?"
         }
-        return nameEntered
     }
     var hoursSelected: Double {
         let hrs = hoursOptions[pickerView.selectedRow(inComponent: 0)]
@@ -34,10 +38,6 @@ class CashierViewController: UIViewController {
         return Double("\(hrs).\(subhrs)")!
     }
     
-    // Delegates
-    var delegate: CashierDelegate?
-
-
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

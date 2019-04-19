@@ -115,6 +115,16 @@ class MainViewController: UITableViewController {
         )
     }
     
+    // Prevent moving across sections.
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if proposedDestinationIndexPath.section != sourceIndexPath.section {
+            return sourceIndexPath
+        }
+        else {
+            return proposedDestinationIndexPath
+        }
+    }
+    
     // MARK: Headers
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
@@ -181,7 +191,6 @@ class MainViewController: UITableViewController {
             performSegue(withIdentifier: "editCashier", sender: self)
         }
     }
-
 }
 
 
