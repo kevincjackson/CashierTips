@@ -199,6 +199,10 @@
                             </navigationBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sjd-A5-pwV">
                                 <rect key="frame" x="0.0" y="88" width="375" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="HoX-jA-Epq" id="UAI-m0-MTZ"/>
+                                    <outlet property="delegate" destination="HoX-jA-Epq" id="7I7-EK-7OU"/>
+                                </connections>
                             </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrT-Mo-vTO">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

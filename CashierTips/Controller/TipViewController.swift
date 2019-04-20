@@ -21,10 +21,6 @@ class TipViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up pickerView
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        
         if let selectedAmount = selectedAmount {
             let dollars = Int(selectedAmount)
             let cents = Int(selectedAmount * 100) % 100
