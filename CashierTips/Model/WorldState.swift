@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct WorldState {
+class WorldState: Codable {
     
     // Stored properties
     var totalTips: Double = 0.0
     var cashiers = [Cashier]()
-    
+    let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("worldState.archive")
+
     // Computed Properties
     var tipRate: Double {
         return totalHoursWorked != 0 ? totalTips / totalHoursWorked : 0
@@ -27,20 +28,42 @@ struct WorldState {
         return "Total Hours: \(thw), Tip Rate: \(tr)"
     }
 
-    mutating public func addCashier(cashier: Cashier) {
+    public func addCashier(cashier: Cashier) {
         cashiers.append(cashier)
     }
     
-    mutating public func moveCashier(from a: Int, to b: Int) {
+    public func moveCashier(from a: Int, to b: Int) {
         let cashier = cashiers[a]
         cashiers.remove(at: a)
         cashiers.insert(cashier, at: b)
     }
 
-    mutating public func removeCashier(at index: Int) {
+    public func removeCashier(at index: Int) {
         cashiers.remove(at: index)
     }
 
     // MARK: - Archiving
+    public func archive() {
+        do {
+            let data = try PropertyListEncoder().encode(self)
+            try data.write(to: url)
+            print("Archive OK")
+        }
+        catch {
+            print("Archive failed")
+        }
+    }
 
+    init() {
+        do {
+            let data = try Data(contentsOf: url)
+            let worldState = try PropertyListDecoder().decode(WorldState.self, from: data)
+            cashiers = worldState.cashiers
+            totalTips = worldState.totalTips
+            print("Unarchive OK")
+        }
+        catch {
+            print("Unarchive failed.")
+        }
+    }
 }
