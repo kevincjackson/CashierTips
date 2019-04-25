@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Cashier: NSObject {
+struct Cashier: Codable {
 
     var name: String
     var hoursWorked: Double

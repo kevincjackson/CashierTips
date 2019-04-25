@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WorldState {
+struct WorldState {
     
     // Stored properties
     var totalTips: Double = 0.0
@@ -26,18 +26,21 @@ class WorldState {
         let tr = String(format: "%.3f", tipRate)
         return "Total Hours: \(thw), Tip Rate: \(tr)"
     }
-    
-    public func addCashier(cashier: Cashier) {
+
+    mutating public func addCashier(cashier: Cashier) {
         cashiers.append(cashier)
     }
     
-    public func removeCashier(at index: Int) {
-        cashiers.remove(at: index)
-    }
-    
-    public func moveCashier(from a: Int, to b: Int) {
+    mutating public func moveCashier(from a: Int, to b: Int) {
         let cashier = cashiers[a]
         cashiers.remove(at: a)
         cashiers.insert(cashier, at: b)
     }
+
+    mutating public func removeCashier(at index: Int) {
+        cashiers.remove(at: index)
+    }
+
+    // MARK: - Archiving
+
 }

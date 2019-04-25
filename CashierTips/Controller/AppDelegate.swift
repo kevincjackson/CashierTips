@@ -12,13 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var worldState = WorldState()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Inject World State
         let navVC = window?.rootViewController as! UINavigationController
         let mainVC = navVC.viewControllers.first as! MainViewController
-        mainVC.worldState = WorldState()
+        mainVC.worldState = worldState
         
         return true
     }
