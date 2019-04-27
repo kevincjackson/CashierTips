@@ -8,19 +8,21 @@
 
 import Foundation
 
-class WorldState: Codable {
+struct WorldState: Codable {
     
-    // Stored properties
+    // MARK: - Stored properties
     var totalTips: Double = 0.0
     var cashiers = [Cashier]()
 
-    // Computed Properties
+    // MARK: Computed Properties
     var tipRate: Double {
         return totalHoursWorked != 0 ? totalTips / totalHoursWorked : 0
     }
+    
     var totalHoursWorked: Double {
         return cashiers.reduce(0) { $0 + $1.hoursWorked }
     }
+    
     var totalTipsDescription: String {
         let thw = String(format: "%.2f", totalHoursWorked)
         let tr = String(format: "%.3f", tipRate)

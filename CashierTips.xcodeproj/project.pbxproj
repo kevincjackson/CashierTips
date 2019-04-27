@@ -72,7 +72,8 @@
 			children = (
 				0A6689E5225950B300BBFCCC /* View */,
 				0A6689E6225950BA00BBFCCC /* Controller */,
-				0A6689E4225950A800BBFCCC /* Model */,
+				0A6689E4225950A800BBFCCC /* Models */,
+				0AD3E3EB22741B0D00597372 /* Model Controllers */,
 				0A5A57832256B11200D669C2 /* Assets.xcassets */,
 				0A5A57852256B11200D669C2 /* LaunchScreen.storyboard */,
 				0A5A57882256B11200D669C2 /* Info.plist */,
@@ -80,16 +81,14 @@
 			path = CashierTips;
 			sourceTree = "<group>";
 		};
-		0A6689E4225950A800BBFCCC /* Model */ = {
+		0A6689E4225950A800BBFCCC /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				0AD14C44226503D400F3D833 /* WorldState.swift */,
 				0A5A578E2256B1E400D669C2 /* Cashier.swift */,
-				0AD3E3E92274005000597372 /* StateController.swift */,
-				0AD3E3E72273FDFD00597372 /* StorageController.swift */,
 				0AD61DFF225B1FDD00A403E3 /* Constants.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		0A6689E5225950B300BBFCCC /* View */ = {
@@ -110,6 +109,15 @@
 				0A6689E222593DED00BBFCCC /* CashierViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		0AD3E3EB22741B0D00597372 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0AD3E3E92274005000597372 /* StateController.swift */,
+				0AD3E3E72273FDFD00597372 /* StorageController.swift */,
+			);
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
