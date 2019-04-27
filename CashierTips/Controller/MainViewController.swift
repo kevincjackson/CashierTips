@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UITableViewController {
         
-    var worldState: WorldState!
+    var stateController: StateController!
     var sections = ["Total Tips", "Cashiers"]
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,14 +26,14 @@ class MainViewController: UITableViewController {
         case "gotoTipView":
             let totalTipsVC = segue.destination as! TipViewController
             totalTipsVC.delegate = self
-            totalTipsVC.selectedAmount = worldState.totalTips
+            totalTipsVC.selectedAmount = stateController.worldState.totalTips
         case "newCashier":
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
         case "editCashier":
             let cashierVC = segue.destination as! CashierViewController
             cashierVC.delegate = self
-            cashierVC.cashier = worldState.cashiers[tableView.indexPathForSelectedRow!.row]
+            cashierVC.cashier = stateController.worldState.cashiers[tableView.indexPathForSelectedRow!.row]
             cashierVC.cashierIndex = tableView.indexPathForSelectedRow!.row
         default:
             preconditionFailure("Unknown segue identifier.")
@@ -59,7 +59,7 @@ class MainViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : worldState.cashiers.count
+        return section == 0 ? 1 : stateController.worldState.cashiers.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,14 +68,17 @@ class MainViewController: UITableViewController {
 
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "totalTipsCell", for: indexPath)
-            cell.textLabel?.text = String(format: "$%.2f", worldState.totalTips)
-            cell.detailTextLabel?.text = worldState.totalTipsDescription
+            cell.textLabel?.text = String(format: "$%.2f", stateController.worldState.totalTips)
+            cell.detailTextLabel?.text = stateController.worldState.totalTipsDescription
         }
         else {
             cell = tableView.dequeueReusableCell(withIdentifier: "cashierCell", for: indexPath)
-            let cashier = worldState.cashiers[indexPath.row]
+            let cashier = stateController.worldState.cashiers[indexPath.row]
             cell.textLabel?.text = cashier.name + String(format: " (%.2f h)", cashier.hoursWorked)
-            cell.detailTextLabel?.text = cashier.getTipsDescribed(rate: worldState.tipRate)
+            cell.detailTextLabel?.text = CurrencyFormatter().stringFrom(
+                double: cashier.calculateTips(usingRate: stateController.worldState.tipRate)
+            )
+                
         }
 
         return cell
@@ -86,11 +89,11 @@ class MainViewController: UITableViewController {
         if editingStyle == .delete {
             
             if indexPath.section == 0 {
-                worldState.totalTips = 0.0
+                stateController.setTotalTips(0)
                 animateTableViewReloadData()
             }
             else {
-                worldState.removeCashier(at: indexPath.row)
+                stateController.removeCashier(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 
                 // Add delay to allow for the row deletion
@@ -109,7 +112,7 @@ class MainViewController: UITableViewController {
     }
         
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        worldState.moveCashier(
+        stateController.moveCashier(
             from: sourceIndexPath.row,
             to: destinationIndexPath.row
         )
@@ -147,7 +150,7 @@ class MainViewController: UITableViewController {
             return nil
         }
         else {
-            if worldState.cashiers.isEmpty {
+            if stateController.worldState.cashiers.isEmpty {
                 let footerView = UITableViewHeaderFooterView()
                 footerView.backgroundView = UIView(frame: footerView.bounds)
                 footerView.backgroundView?.backgroundColor = UIColor.white
@@ -171,7 +174,7 @@ class MainViewController: UITableViewController {
             return 0
         }
         else {
-            if worldState.cashiers.isEmpty {
+            if stateController.worldState.cashiers.isEmpty {
                 return 60
             }
             else {
@@ -199,7 +202,7 @@ extension MainViewController: TipViewDelegate {
     func tipAmountUpdated(amount: Double) {
         
         // Update model
-        worldState.totalTips = amount
+        stateController.setTotalTips(amount)
         
         // Update view
         animateTableViewReloadData()
@@ -214,14 +217,14 @@ extension MainViewController: CashierDelegate {
         
         // Add new cashier
         if isNew {
-            worldState.addCashier(cashier: cashier)
-            let indexPath = IndexPath(row: (worldState.cashiers.count - 1), section: 1)
+            stateController.addCashier(cashier: cashier)
+            let indexPath = IndexPath(row: (stateController.worldState.cashiers.count - 1), section: 1)
             tableView.insertRows(at: [indexPath], with: .automatic)
             
         }
         // Replace existing cashier
         else {
-            worldState.cashiers[cashierIndex] = cashier
+            stateController.updateCashier(cashier: cashier, at: cashierIndex) 
         }
         
         animateTableViewReloadData()

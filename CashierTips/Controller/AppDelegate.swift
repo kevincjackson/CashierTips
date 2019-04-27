@@ -12,20 +12,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var worldState = WorldState()
+    var stateController = StateController(storageController: StorageController())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Inject World State
         let navVC = window?.rootViewController as! UINavigationController
         let mainVC = navVC.viewControllers.first as! MainViewController
-        mainVC.worldState = worldState
+        mainVC.stateController = stateController
         
         return true
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        worldState.archive()
+        stateController.save()
     }
 
 }

@@ -15,6 +15,8 @@
 		0A5A578F2256B1E400D669C2 /* Cashier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A578E2256B1E400D669C2 /* Cashier.swift */; };
 		0A6689E322593DED00BBFCCC /* CashierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6689E222593DED00BBFCCC /* CashierViewController.swift */; };
 		0AD14C45226503D400F3D833 /* WorldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD14C44226503D400F3D833 /* WorldState.swift */; };
+		0AD3E3E82273FDFD00597372 /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3E3E72273FDFD00597372 /* StorageController.swift */; };
+		0AD3E3EA2274005000597372 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3E3E92274005000597372 /* StateController.swift */; };
 		0AD61DFE225B188700A403E3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A577E2256B11100D669C2 /* MainViewController.swift */; };
 		0AD61E00225B1FDD00A403E3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD61DFF225B1FDD00A403E3 /* Constants.swift */; };
 		0AF0C1F0226A73D70051A378 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */; };
@@ -32,6 +34,8 @@
 		0A5A578E2256B1E400D669C2 /* Cashier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cashier.swift; sourceTree = "<group>"; };
 		0A6689E222593DED00BBFCCC /* CashierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierViewController.swift; sourceTree = "<group>"; };
 		0AD14C44226503D400F3D833 /* WorldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldState.swift; sourceTree = "<group>"; };
+		0AD3E3E72273FDFD00597372 /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
+		0AD3E3E92274005000597372 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 		0AD61DFF225B1FDD00A403E3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,8 +85,9 @@
 			children = (
 				0AD14C44226503D400F3D833 /* WorldState.swift */,
 				0A5A578E2256B1E400D669C2 /* Cashier.swift */,
+				0AD3E3E92274005000597372 /* StateController.swift */,
+				0AD3E3E72273FDFD00597372 /* StorageController.swift */,
 				0AD61DFF225B1FDD00A403E3 /* Constants.swift */,
-				0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				0A5A57802256B11100D669C2 /* Main.storyboard */,
+				0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +191,8 @@
 				0A6689E322593DED00BBFCCC /* CashierViewController.swift in Sources */,
 				0AD61DFE225B188700A403E3 /* MainViewController.swift in Sources */,
 				0AD61E00225B1FDD00A403E3 /* Constants.swift in Sources */,
+				0AD3E3E82273FDFD00597372 /* StorageController.swift in Sources */,
+				0AD3E3EA2274005000597372 /* StateController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,6 @@ class WorldState: Codable {
     // Stored properties
     var totalTips: Double = 0.0
     var cashiers = [Cashier]()
-    let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("worldState.archive")
 
     // Computed Properties
     var tipRate: Double {
@@ -26,44 +25,5 @@ class WorldState: Codable {
         let thw = String(format: "%.2f", totalHoursWorked)
         let tr = String(format: "%.3f", tipRate)
         return "Total Hours: \(thw), Tip Rate: \(tr)"
-    }
-
-    public func addCashier(cashier: Cashier) {
-        cashiers.append(cashier)
-    }
-    
-    public func moveCashier(from a: Int, to b: Int) {
-        let cashier = cashiers[a]
-        cashiers.remove(at: a)
-        cashiers.insert(cashier, at: b)
-    }
-
-    public func removeCashier(at index: Int) {
-        cashiers.remove(at: index)
-    }
-
-    // MARK: - Archiving
-    public func archive() {
-        do {
-            let data = try PropertyListEncoder().encode(self)
-            try data.write(to: url)
-            print("Archive OK")
-        }
-        catch {
-            print("Archive failed")
-        }
-    }
-
-    init() {
-        do {
-            let data = try Data(contentsOf: url)
-            let worldState = try PropertyListDecoder().decode(WorldState.self, from: data)
-            cashiers = worldState.cashiers
-            totalTips = worldState.totalTips
-            print("Unarchive OK")
-        }
-        catch {
-            print("Unarchive failed.")
-        }
     }
 }

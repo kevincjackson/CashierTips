@@ -18,9 +18,8 @@ struct Cashier: Codable {
         self.hoursWorked = hoursWorked
     }
 
-    public func getTipsDescribed(rate: Double) -> String {
-        let tips = hoursWorked * rate
-        return CurrencyFormatter().stringFrom(double: tips)
+    public func calculateTips(usingRate rate: Double) -> Double {
+        return hoursWorked * rate
     }
     
 }
