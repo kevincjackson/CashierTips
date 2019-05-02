@@ -13,7 +13,7 @@ class TipViewController: UIViewController {
     let dollarOptions: [String] = Array(0...999).map { String($0) }
     let centOptions: [String] = Constants.ZeroToNinetyNinePadded
     var selectedAmount: Double?
-    var delegate: TipViewDelegate?
+    weak var delegate: TipViewDelegate?
     
     @IBOutlet weak var pickerView: UIPickerView!
     
@@ -44,7 +44,7 @@ class TipViewController: UIViewController {
 }
 
 // MARK: - TipViewDelegate
-protocol TipViewDelegate {
+protocol TipViewDelegate: AnyObject {
     func tipAmountUpdated(amount: Double)
 }
 

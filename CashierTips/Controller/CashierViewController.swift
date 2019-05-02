@@ -15,7 +15,7 @@ class CashierViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     
     // Stored Properties
-    var delegate: CashierDelegate?
+    weak var delegate: CashierDelegate?
 
     var cashier: Cashier?
     var cashierIndex = 0
@@ -110,7 +110,7 @@ class CashierViewController: UIViewController {
 
 
 // MARK: - Cashier Delegate
-protocol CashierDelegate {
+protocol CashierDelegate: AnyObject {
     func cashierUpdated(cashier: Cashier, isNew: Bool, cashierIndex: Int)
 }
 

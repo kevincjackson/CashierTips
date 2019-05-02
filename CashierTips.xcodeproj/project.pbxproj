@@ -103,7 +103,6 @@
 		0A6689E6225950BA00BBFCCC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0A5A577C2256B11100D669C2 /* AppDelegate.swift */,
 				0A5A577E2256B11100D669C2 /* MainViewController.swift */,
 				0A4F684522588A4F00BFDADB /* TipViewController.swift */,
 				0A6689E222593DED00BBFCCC /* CashierViewController.swift */,
@@ -114,6 +113,7 @@
 		0AD3E3EB22741B0D00597372 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A5A577C2256B11100D669C2 /* AppDelegate.swift */,
 				0AD3E3E92274005000597372 /* StateController.swift */,
 				0AD3E3E72273FDFD00597372 /* StorageController.swift */,
 			);
