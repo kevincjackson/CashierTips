@@ -75,7 +75,6 @@
 				0A6689E4225950A800BBFCCC /* Models */,
 				0AD3E3EB22741B0D00597372 /* Model Controllers */,
 				0A5A57832256B11200D669C2 /* Assets.xcassets */,
-				0A5A57852256B11200D669C2 /* LaunchScreen.storyboard */,
 				0A5A57882256B11200D669C2 /* Info.plist */,
 			);
 			path = CashierTips;
@@ -94,8 +93,9 @@
 		0A6689E5225950B300BBFCCC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0A5A57802256B11100D669C2 /* Main.storyboard */,
 				0AF0C1EF226A73D70051A378 /* CurrencyFormatter.swift */,
+				0A5A57802256B11100D669C2 /* Main.storyboard */,
+				0A5A57852256B11200D669C2 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
