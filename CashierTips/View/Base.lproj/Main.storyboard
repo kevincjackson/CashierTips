@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -75,6 +76,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="qVX-QD-ab0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="V2p-We-h2B">
+                            <color key="tintColor" name="CTGreen"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="jEg-q0-IXp"/>
                             </connections>
@@ -103,11 +105,13 @@
                                 <items>
                                     <navigationItem title="Cashier" id="oEr-yC-Fd2">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fj7-yK-5tH">
+                                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                             <connections>
                                                 <action selector="cancelButtonPressed:" destination="kF2-p8-cz0" id="Ihy-1r-CMk"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="cFl-9L-R2W">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="cFl-9L-R2W">
+                                            <color key="tintColor" name="CTGreen"/>
                                             <connections>
                                                 <action selector="doneButtonPressed:" destination="kF2-p8-cz0" id="wDe-6n-Wqi"/>
                                             </connections>
@@ -185,11 +189,13 @@
                                 <items>
                                     <navigationItem title="Total Tips" id="NsF-vK-XCb">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="etI-bn-0RO">
+                                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                             <connections>
                                                 <action selector="cancelButtonPressed:" destination="HoX-jA-Epq" id="6cF-Qw-hOj"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="AI1-8Y-Wag">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="AI1-8Y-Wag">
+                                            <color key="tintColor" name="CTGreen"/>
                                             <connections>
                                                 <action selector="doneButtonPressed:" destination="HoX-jA-Epq" id="NRw-gS-UWj"/>
                                             </connections>
@@ -252,6 +258,11 @@
             <point key="canvasLocation" x="242" y="110"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="CTGreen">
+            <color red="0.0" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1nZ-aV-eke"/>
     </inferredMetricsTieBreakers>

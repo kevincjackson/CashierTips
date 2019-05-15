@@ -17,6 +17,7 @@ class MainViewController: UITableViewController {
         super.init(coder: aDecoder)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.init(named: "CTGreen")
         title = "Cashier Tips"
     }
 
